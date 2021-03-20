@@ -23,8 +23,8 @@ public class RepositoryTest {
     @Transactional
     public void testFindAll() throws Exception {
         User user= new User();
-        user.setId(3L);
-        user.setUsername("taozs");
+        user.setId(5L);
+        user.setUsername("taozs1");
         user.setPassword("3333333");
         userMapper.insertUser(user);
         List<User> users = userMapper.findAll();

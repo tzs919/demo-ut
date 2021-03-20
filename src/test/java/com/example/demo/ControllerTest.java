@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.alibaba.fastjson.JSON;
 import com.example.demo.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("ut")
+@ActiveProfiles("ut2")
 public class ControllerTest {
 
     private MockMvc mockMvc;
@@ -83,13 +84,48 @@ public class ControllerTest {
         user.setUsername("new Name");
         user.setPassword("pw");
 
-        System.out.println(mapper.writeValueAsString(user));
+        System.out.println("==1=="+mapper.writeValueAsString(user));
+        System.out.println("==2=="+JSON.toJSONString(user));
+
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/users")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(mapper.writeValueAsString(user)))
+                .content(JSON.toJSONString(user)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
+        String content = mvcResult.getResponse().getContentAsString();
+
+        Assert.assertEquals("1", content);
+    }
+
+    @Test
+    public void testPut() throws Exception {
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("new Name");
+        user.setPassword("pw");
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/users")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(JSON.toJSONString(user)))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andReturn();
+
+        String content = mvcResult.getResponse().getContentAsString();
+
+        Assert.assertEquals("1", content);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/users/2"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
 
