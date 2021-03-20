@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driverClassName: "org.sqlite.JDBC"
+    url: "jdbc:sqlite::memory:"
+    initialization-mode: always
+    schema: classpath:schema.sql
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+# @SpringBootTest使用spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+# spring.datasource.type=org.apache.tomcat.jdbc.pool.DataSource
+# spring.datasource.type=org.apache.commons.dbcp.BasicDataSource
+# spring.datasource.type=org.apache.commons.dbcp2.BasicDataSource
+
+
+
+#mybatis的相关配置
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  #  config-location: classpath:mybatis/mybatis-config.xml
+
+  type-aliases-package: com.example.demo.entity
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 二级缓存的总开关
+    cache-enabled: true
+    #    SESSION/STATEMENT"
+    localCacheScope: STATEMENT
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info

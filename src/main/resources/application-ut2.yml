@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driverClassName: "org.h2.Driver"
+    # url: jdbc:h2:file:./db/test       # 以本地文件存储数据的方式使用H2数据库
+    # 以内存方式使用数据库（这里会创建一个数据库名为 test 的数据库实例）
+    url: "jdbc:h2:mem:"
+#    url: jdbc:h2:mem:test
+    username: sa
+    password: sa
+    initialization-mode: always
+    schema: classpath:schema.sql
+
+#mybatis的相关配置
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  #  config-location: classpath:mybatis/mybatis-config.xml
+
+  type-aliases-package: com.example.demo.entity
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 二级缓存的总开关
+    cache-enabled: true
+    #    SESSION/STATEMENT"
+    localCacheScope: STATEMENT
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
