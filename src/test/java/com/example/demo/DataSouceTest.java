@@ -14,9 +14,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@RunWith(SpringRunner.class)
 @ActiveProfiles("ut2")
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class DataSouceTest {
 
 //    @Autowired

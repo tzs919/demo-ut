@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -77,6 +78,7 @@ public class ControllerTest {
 
 
     @Test
+    @Transactional
     public void testInsert() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         User user = new User();
@@ -100,6 +102,7 @@ public class ControllerTest {
     }
 
     @Test
+    @Transactional
     public void testPut() throws Exception {
         User user = new User();
         user.setId(1L);
@@ -120,6 +123,7 @@ public class ControllerTest {
     }
 
     @Test
+    @Transactional
     public void testDelete() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/users/2"))
                 .andDo(print())

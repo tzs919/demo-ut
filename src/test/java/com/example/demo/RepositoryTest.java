@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @ActiveProfiles("ut2")
+@SpringBootTest
 public class RepositoryTest {
     @Autowired
     private UserMapper userMapper;
