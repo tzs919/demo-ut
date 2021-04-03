@@ -10,13 +10,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,8 +50,11 @@ public class StoreTest {
                 .andExpect(jsonPath("$.store.*", hasSize(2)))//store下的所有节点，book数组和bicycle节点
                 .andExpect(jsonPath("$.store..price", hasSize(5)))//store下的所有price节点
                 .andExpect(jsonPath("$..book[2].isbn", hasItem("0-553-21311-3")))//匹配第3个book节点
-//                .andExpect(jsonPath("$..book[(@.length-1)].isbn", is("0-395-19395-8")))//匹配倒数第1个book节点
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .andExpect(jsonPath("$..book[-1:].isbn", hasItem("0-395-19395-8")))//匹配倒数第1个book节点
+                .andExpect(jsonPath("$..book[0,1]", hasSize(2)))//匹配前两个book节点
+                .andExpect(jsonPath("$..book[?(@.isbn)].isbn", hasItems("0-553-21311-3","0-395-19395-8")))//过滤含isbn字段的节点
+                .andExpect(jsonPath("$..book[?(@.price<10)].price", hasItems(8.95,8.99)))//过滤price<10的节点
+                .andExpect(status().isOk()).andReturn();
     }
 
 }
