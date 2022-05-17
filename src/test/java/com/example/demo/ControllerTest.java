@@ -86,8 +86,8 @@ public class ControllerTest {
         user.setUsername("new Name");
         user.setPassword("pw");
 
-        System.out.println("==1=="+mapper.writeValueAsString(user));
-        System.out.println("==2=="+JSON.toJSONString(user));
+        System.out.println("==jackson==" + mapper.writeValueAsString(user));
+        System.out.println("==fastjson==" + JSON.toJSONString(user));
 
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/users")

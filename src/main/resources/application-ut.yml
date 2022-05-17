@@ -16,14 +16,14 @@ spring:
 
 
 
-#mybatis的相关配置
+# mybatis的相关配置
 mybatis:
-  #mapper配置文件
+  # mapper配置文件
   mapper-locations: classpath:mapper/*.xml
-  #  config-location: classpath:mybatis/mybatis-config.xml
+  # config-location: classpath:mybatis/mybatis-config.xml
 
   type-aliases-package: com.example.demo.entity
-  #开启驼峰命名
+  # 开启驼峰命名
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

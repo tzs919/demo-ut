@@ -17,7 +17,7 @@ import java.sql.SQLException;
 @RunWith(SpringRunner.class)
 @ActiveProfiles("ut2")
 @SpringBootTest
-public class DataSouceTest {
+public class DataSourceTest {
 
 //    @Autowired
 //    DataSource dataSource1;

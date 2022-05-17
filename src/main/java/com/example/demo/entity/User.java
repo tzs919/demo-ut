@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
-
+//pojo
 public class User implements Serializable {
     private Long id;//编号
     private String username;//用户名
