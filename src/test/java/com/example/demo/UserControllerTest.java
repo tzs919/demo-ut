@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("ut2")
-public class ControllerTest {
+public class UserControllerTest {
 
     private MockMvc mockMvc;
 

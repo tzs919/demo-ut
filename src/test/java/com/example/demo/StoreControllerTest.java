@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("ut2")
-public class StoreTest {
+public class StoreControllerTest {
     private MockMvc mockMvc;
 
     /**
